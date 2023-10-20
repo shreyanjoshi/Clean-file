@@ -1,8 +1,8 @@
-from better_profanity import profanity
-import pandas as pd
+import re
 from textblob import TextBlob
 from language_tool_python import LanguageTool
-import re
+from better_profanity import profanity
+import pandas as pd
 
 def remove_punctuation(text):
     return re.sub(r'[^\w\s]', '', str(text))
@@ -26,19 +26,19 @@ df = pd.read_excel(input_csv)
 
 # Create new columns for corrected versions
 df['Corrected Spelling'] = ""
-#df['Corrected Grammar'] = ""
+df['Corrected Grammar'] = ""
 df['Profanity'] = ""
 
-# Apply corrections conditionally based on the 'Role' column
+# Apply corrections only for 'User' inputs under the 'Role' column
 for index, row in df.iterrows():
     if row['Role'] == 'User':
         profanity_check = add_profanity_prediction(row['Content'])
       #  cleaned_text = remove_punctuation(row['Content'])
         corrected_spelling_text = correct_spelling(row['Content'])
-      # corrected_grammar_text = correct_grammar(corrected_spelling_text)
+        corrected_grammar_text = correct_grammar(corrected_spelling_text)
         # Update the new columns with corrected versions
         df.at[index, 'Corrected Spelling'] = corrected_spelling_text
-      #  df.at[index, 'Corrected Grammar'] = corrected_grammar_text
+        df.at[index, 'Corrected Grammar'] = corrected_grammar_text
         df.at[index, 'Profanity'] = profanity_check
 
 # Save the corrected data to a new CSV file
