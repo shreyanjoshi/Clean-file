@@ -32,7 +32,6 @@ for index, row in df.iterrows():
         profanity_check = add_profanity_prediction(row['Content'])
         corrected_spelling_text = correct_spelling(row['Content'])
         corrected_grammar_text = correct_grammar(corrected_spelling_text)
- #       corrected_grammar_text = correct_grammar(row['Content'])
         # Update the new columns with corrected versions
         df.at[index, 'Corrected Spelling'] = corrected_spelling_text
         df.at[index, 'Corrected Grammar'] = corrected_grammar_text
