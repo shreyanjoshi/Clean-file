@@ -3,7 +3,7 @@ Clean any file for spelling mistakes, grammatical errors, and filtering profanit
 
 Clean-file corrects all spelling mistakes, grammatical errors, and filter profanity in any file. 
 
-Currently, if you want to use all the features, it will approximately take 1 minute to clean 100 sentences.  
+Currently, the script takes in CSV files and cleans 'User' entries. It will approximately take 1 minute to clean 100 sentences.  
 
 ## Required Libraries 
 
